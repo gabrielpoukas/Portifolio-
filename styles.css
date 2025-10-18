@@ -1,5 +1,5 @@
 /* ===================
-   1. RESET BÁSICO E VARIAVEIS (Mobile-First)
+   1. RESET BÁSICO E VARIÁVEIS (Mobile-First)
    =================== */
    * {
     margin: 0;
@@ -8,18 +8,25 @@
 }
 
 :root {
-    --cor-principal: #0077b6; /* Azul que combina com TI/LinkedIn */
-    --cor-secundaria: #00b4d8;
-    --cor-fundo: #f0f4f8; /* Cinza/Azul Claro */
+    --cor-principal: #2979ff; /* Azul vibrante e moderno para links e títulos */
+    --cor-secundaria: #ffb74d; /* Laranja suave para destaques e bordas */
+    --cor-fundo: #f8f9fa; /* Fundo muito claro e limpo */
     --cor-texto: #333;
     --cor-fundo-card: #ffffff;
+    --sombra-leve: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais sutil */
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Transições suaves para todos os elementos interativos */
+a, button, .card-projeto {
+    transition: all 0.3s ease;
 }
 
 /* ===================
@@ -28,23 +35,39 @@ body {
 .header {
     background-color: var(--cor-principal);
     color: white;
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1rem; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: var(--sombra-leve);
 }
 
-.logo {
-    color: white;
+/* ESTILO DO LOGO COM IMAGEM PEQUENA E TEXTO */
+.logo-img-container {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    font-size: 1.5rem;
+    color: white;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
-/* Menu Hamburguer e Lista (Oculta no Mobile por padrão) */
+.logo-imagem {
+    width: 35px; 
+    height: 35px;
+    border-radius: 50%; /* Foto em círculo */
+    object-fit: cover;
+    border: 2px solid var(--cor-secundaria);
+    margin-right: 0.5rem;
+}
+
+.logo-imagem:hover {
+    transform: scale(1.1);
+}
+
 .menu-hamburguer {
     background: none;
     border: none;
@@ -56,18 +79,19 @@ body {
 .nav-list {
     list-style: none;
     position: absolute;
-    top: 100%; /* Abaixo do header */
+    top: 100%; 
     left: 0;
     width: 100%;
     background-color: var(--cor-principal);
-    display: none; /* Oculto por JS */
+    display: none; 
     flex-direction: column;
     text-align: center;
     padding: 0;
+    z-index: 90;
 }
 
 .nav-list.active {
-    display: flex; /* Visível quando ativado por JS */
+    display: flex; 
 }
 
 .nav-list li a {
@@ -75,11 +99,11 @@ body {
     padding: 1rem;
     color: white;
     text-decoration: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-list li a:hover {
-    background-color: var(--cor-secundaria);
+    background-color: #1e59c2;
 }
 
 /* ===================
@@ -93,133 +117,215 @@ main {
     padding: 2rem 1rem;
     margin: 1rem;
     background-color: var(--cor-fundo-card);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* Cantos mais arredondados */
+    box-shadow: var(--sombra-leve);
 }
 
 h1, h2, h3 {
     color: var(--cor-principal);
     margin-bottom: 1rem;
+    text-align: center;
+}
+h2 {
+    font-size: 1.8rem;
+}
+h3 {
+    font-size: 1.4rem;
 }
 
 /* 3.1. Seção Início */
 .inicio {
     text-align: center;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin: 0; 
+    border-radius: 0;
+    background-color: #f0f4f8; /* Fundo levemente diferente para a seção principal */
 }
 
 .foto-perfil {
-    width: 150px;
-    height: 150px;
+    width: 180px; /* Tamanho ajustado para impacto */
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1rem;
-    border: 4px solid var(--cor-secundaria);
+    margin-bottom: 1.5rem;
+    border: 5px solid var(--cor-secundaria);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 .pitch {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 500;
-    margin: 1.5rem 0;
+    margin: 1.5rem auto;
+    max-width: 400px;
 }
 
 .links-sociais a {
     color: var(--cor-principal);
-    font-size: 2rem;
     margin: 0 10px;
+    opacity: 0.8;
+}
+.links-sociais a:hover {
+    color: var(--cor-secundaria);
+    opacity: 1;
+    transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
 }
 
 /* 3.2. Seção Formação */
-.card-formacao, .lista-cursos {
-    margin-top: 1rem;
+.card-formacao {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo para as SKILL TAGS */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.skill-tag {
+    background-color: var(--cor-principal);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+.skill-tag:hover {
+    opacity: 1;
+    background-color: var(--cor-secundaria);
+}
+
+.lista-cursos {
+    list-style: none; /* remove o estilo de lista padrão */
     padding: 1rem;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .lista-cursos li {
-    margin-bottom: 0.5rem;
-    list-style-position: inside;
+    margin-bottom: 0.7rem;
+    padding-left: 1.5rem;
+    position: relative;
+    text-align: left;
+}
+.lista-cursos li::before {
+    content: "🚀";
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
 }
 
 /* 3.3. Seção Projetos */
 .card-projeto {
     margin-bottom: 2rem;
     border: 1px solid #eee;
-    padding: 1rem;
-    border-radius: 6px;
+    padding: 1.5rem;
+    border-radius: 10px;
     text-align: center;
+    background-color: var(--cor-fundo-card);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-projeto:hover {
+    transform: translateY(-5px); /* Efeito de elevação profissional */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card-projeto img {
     width: 100%;
-    max-height: 200px;
+    max-height: 250px;
     object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
 }
 
 .tecnologias {
     font-size: 0.9rem;
     color: #555;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0 1rem;
+    font-weight: 600;
 }
 
+/* Estilo para Botões de Projeto e Contato */
 .btn-live, .btn-github, .btn-contato {
     display: inline-block;
-    padding: 0.7rem 1.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
+    padding: 0.8rem 1.8rem;
+    margin: 0.5rem 0.25rem;
+    border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
 .btn-live, .btn-contato {
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-principal);
     color: white;
+    box-shadow: 0 4px 6px rgba(41, 121, 255, 0.3);
 }
 
 .btn-github {
-    background-color: #333;
+    background-color: #444;
     color: white;
 }
 
 .btn-live:hover, .btn-contato:hover {
-    background-color: var(--cor-principal);
+    background-color: #1e59c2;
+    box-shadow: 0 6px 10px rgba(41, 121, 255, 0.4);
 }
 
 .btn-github:hover {
-    background-color: #555;
+    background-color: #666;
 }
 
 /* 3.4. Seção Contato */
+/* ALTERADO: Centralizando o texto e o botão */
+#contato {
+    text-align: center; 
+}
+
+.btn-contato {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    /* Com 'text-align: center' na seção, o inline-block já centraliza. */
+}
+
 .links-sociais-footer {
     margin-top: 1.5rem;
-    text-align: center;
+    text-align: center; /* Mantido por garantia */
 }
 
 .links-sociais-footer a {
     color: var(--cor-principal);
     margin: 0 1rem;
+    opacity: 0.8;
 }
 
 /* ===================
    4. RODAPÉ
    =================== */
 footer {
-    background-color: var(--cor-principal);
-    color: white;
+    background-color: #333;
+    color: #ccc;
     text-align: center;
     padding: 1rem;
+    font-size: 0.85rem;
 }
 
 /* ===================
-   5. MEDIA QUERIES (TABLET/DESKTOP)
+   5. MEDIA QUERIES (TABLET/DESKTOP) - Melhora o Layout em Telas Maiores
    =================== */
 @media screen and (min-width: 768px) {
-    /* Esconde o menu hambúrguer */
+    /* Oculta o menu hambúrguer no Desktop */
     .menu-hamburguer {
         display: none;
     }
@@ -243,17 +349,35 @@ footer {
     .secao {
         padding: 3rem 2rem;
         margin: 2rem auto;
-        max-width: 900px; /* Limite a largura para melhor leitura */
+        max-width: 1000px; 
+    }
+    
+    .inicio h1 {
+        font-size: 3rem;
+    }
+    .inicio h2 {
+        font-size: 1.5rem;
     }
 
-    /* Layout de Projetos em Colunas */
+    /* Layout de Projetos em Duas Colunas (Grid) */
     #projetos {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Duas colunas */
+        grid-template-columns: 1fr 1fr; 
         gap: 2rem;
     }
 
     .card-projeto {
-        margin-bottom: 0; /* Remove margem extra do mobile */
+        margin-bottom: 0; 
+    }
+    
+    /* Centraliza a lista de cursos em desktop */
+    .lista-cursos {
+        max-width: 80%;
+        margin: 1rem auto;
+    }
+
+    /* Garante a centralização do texto/botão de contato no Desktop */
+    #contato {
+        text-align: center; 
     }
 }
